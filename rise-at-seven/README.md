@@ -1,6 +1,7 @@
+
 # Rise at Seven — Homepage Clone
 
-A pixel-perfect recreation of the [riseatseven.com](https://riseatseven.com) homepage built with Next.js 15, Framer Motion, GSAP, and Lenis smooth scroll.
+A pixel-perfect recreation of [riseatseven.com](https://riseatseven.com) built with Next.js 15, Framer Motion, GSAP, and Lenis smooth scroll.
 
 ---
 
@@ -49,7 +50,7 @@ rise-at-seven-clone/
 │   └── lib/
 │       └── utils.ts          ← cn() helper
 │
-├── public/                   ← Static assets (add your own images here)
+├── public/                   ← Static assets
 ├── package.json
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -58,156 +59,63 @@ rise-at-seven-clone/
 
 ---
 
-## STEP 1 — Install Node.js
+## Sections
 
-Download from: https://nodejs.org (choose LTS version)
+**AnnouncementBar** — Top red bar with a short rotating message.
 
-Verify installation:
-```bash
-node --version    # should show v18 or higher
-npm --version     # should show 9 or higher
-```
+**Navbar** — Fixed navigation with desktop dropdown menus and a mobile hamburger. Hides/shows on scroll.
 
----
+**Hero** — Full-viewport cinematic section with a background video/image, large heading, and a staggered entrance animation.
 
-## STEP 2 — Set Up the Project
+**LogoMarquee** — Infinite auto-scrolling strip of client logos using CSS animation.
 
-### Option A — Use this downloaded folder
+**FeaturedWork** — Horizontally scrollable work cards, draggable with Framer Motion's drag constraints.
 
-1. Extract the ZIP
-2. Open terminal in the folder
-3. Run:
+**Services** — List of service offerings. Each row reveals an image on hover and animates with GSAP.
 
-```bash
-npm install
-```
+**SwipeCards** — Sticky scroll sequence cycling through three panels: Pioneers, Awards, and Speed stats.
 
-### Option B — Create from scratch
+**WhatsNew** — Grid of blog/news cards with hover effects.
 
-```bash
-npx create-next-app@latest rise-at-seven-clone --typescript --tailwind --eslint --app
-cd rise-at-seven-clone
-npm install framer-motion gsap @studio-freight/lenis react-icons clsx tailwind-merge
-```
+**WaveText** — A scroll-driven marquee CTA that speeds up as the user scrolls.
+
+**Footer** — Full-width footer with link columns, social icons, and a large contact CTA.
 
 ---
 
-## STEP 3 — Run Locally
+## Key Implementation Details
 
-```bash
-npm run dev
-```
-
-Open: http://localhost:3000
-
----
-
-## STEP 4 — Create GitHub Repository
-
-### Install Git (if not already)
-Download from: https://git-scm.com
-
-### Create repo on GitHub
-1. Go to https://github.com/new
-2. Repository name: `rise-at-seven-clone`
-3. Set to **Public** (needed for free Vercel deploy)
-4. Click **Create repository**
-5. Copy the repo URL shown (looks like `https://github.com/YOUR_NAME/rise-at-seven-clone.git`)
-
-### Push your code
-
-```bash
-# Inside your project folder:
-git init
-git add .
-git commit -m "Initial commit: Rise at Seven homepage clone"
-git branch -M main
-git remote add origin https://github.com/YOUR_NAME/rise-at-seven-clone.git
-git push -u origin main
-```
-
----
-
-## STEP 5 — Deploy Live on Vercel (Free)
-
-1. Go to https://vercel.com
-2. Sign up / log in with your GitHub account
-3. Click **Add New → Project**
-4. Import your `rise-at-seven-clone` repository
-5. Leave all settings as default — Vercel auto-detects Next.js
-6. Click **Deploy**
-
-Your live URL will be:
-```
-https://rise-at-seven-clone.vercel.app
-```
-
-Every time you push to GitHub (`git push`), Vercel auto-deploys.
-
----
-
-## STEP 6 — Making Changes
-
-After editing any file:
-```bash
-git add .
-git commit -m "Update: describe what you changed"
-git push
-```
-
-Vercel will auto-deploy within 30 seconds.
-
----
-
-## File Connection Map
-
-```
-layout.tsx
-  └── imports globals.css (styles applied globally)
-  └── wraps everything in <html><body>
-
-page.tsx
-  └── imports SmoothScroll (wraps entire page for Lenis)
-  └── imports Cursor (custom cursor, desktop only)
-  └── imports AnnouncementBar (top red bar)
-  └── imports Navbar (fixed navigation)
-  └── imports Hero (first visible section)
-  └── imports LogoMarquee (client logos strip)
-  └── imports FeaturedWork (horizontal scroll cards)
-  └── imports Services (hover service rows)
-  └── imports SwipeCards (sticky scroll sections)
-  └── imports WhatsNew (blog news cards)
-  └── imports WaveText (animated marquee CTA)
-  └── imports Footer (bottom section)
-```
+- **Smooth scroll** is handled globally by a Lenis wrapper (`SmoothScroll.tsx`) that integrates with GSAP's ticker for frame-perfect sync.
+- **Custom cursor** uses `mix-blend-difference` for the invert effect and is suppressed on touch devices.
+- **Horizontal drag scroll** in FeaturedWork uses Framer Motion's `drag="x"` with calculated constraints based on container width.
+- **Sticky scroll animations** in SwipeCards use GSAP ScrollTrigger pinning with a scrub value for smooth panel transitions.
+- **Grain texture** is applied globally via a pseudo-element in `globals.css` using an SVG filter.
+- **Fonts** are loaded via Google Fonts in `layout.tsx` and referenced through a CSS variable (`--font-primary`).
 
 ---
 
 ## Customisation
 
-### Change colors
-Edit `src/app/globals.css` — look for `:root { ... }` variables.
+**Colors** — Edit `:root { ... }` variables in `src/app/globals.css`.
 
-### Change content
-Each component has its own data array at the top of the file. Edit directly.
+**Content** — Each component has a data array at the top of its file. Edit directly.
 
-### Add images
-Drop images into `/public/images/` and reference as `/images/filename.jpg`.
+**Images** — Drop files into `/public/images/` and reference as `/images/filename.jpg`.
 
-### Change fonts
-Replace the Google Fonts URL in `src/app/layout.tsx` and update `--font-primary` in `globals.css`.
+**Fonts** — Replace the Google Fonts URL in `src/app/layout.tsx` and update `--font-primary` in `globals.css`.
 
 ---
 
-## Performance Tips
+## Notes
 
-- Images use the real Rise at Seven CDN URLs — replace with your own for production
-- Cursor is disabled on mobile/touch devices automatically
-- Lenis smooth scroll degrades gracefully if the library fails to load
+- Images reference the real Rise at Seven CDN URLs — replace with your own for production use.
+- The custom cursor is automatically disabled on mobile and touch devices.
+- Lenis smooth scroll degrades gracefully if the library fails to load.
+- Requires Node.js v18 or higher.
 
 ---
 
 ## Browser Support
 
-Chrome, Firefox, Safari, Edge (all modern versions)
-Mobile: iOS Safari, Android Chrome
+Chrome, Firefox, Safari, Edge — all modern versions.
+Mobile: iOS Safari, Android Chrome.
