@@ -111,7 +111,7 @@ export default function Hero() {
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             transition={{ delay: 0.5, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8.5vw] font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            className="text-[7vw] sm:text-[7vw] md:text-[6.5vw] lg:text-[6vw] xl:text-[5.5vw] font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
           >
             We Create
           </motion.h1>
