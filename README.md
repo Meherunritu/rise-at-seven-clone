@@ -83,24 +83,6 @@ src/
 
 ---
 
-## Getting Started
-
-```bash
-# Clone the repo
-git clone https://github.com/YOUR_USERNAME/rise-at-seven-clone.git
-cd rise-at-seven-clone
-
-# Install dependencies
-npm install
-
-# Run the dev server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000). Requires **Node.js v18+**.
-
----
-
 ## Customisation
 
 **Colors** → Edit `:root` variables in `src/app/globals.css`
